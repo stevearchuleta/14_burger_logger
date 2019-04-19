@@ -1,55 +1,76 @@
-<center>
-<img src="https://media.giphy.com/media/ToMjGplHPoYqSg7oACc/giphy.gif" alt="" style="max-width: 500px" />
-<a href="http://fontmeme.com/burger-king-font/"><img src="http://fontmeme.com/embed.php?text=Eat-Da-Burger%21&name=Insanibc.ttf&size=100&style_color=000000" alt="Burger King Font"></a>
-</center>
-<br>
-<br>
-<div class="col-md-4">
-  <center>
-  <a href="http://fontmeme.com/burger-king-font/"><img src="http://fontmeme.com/embed.php?text=Add%20a%20Burger%21&name=Insanibc.ttf&size=20&style_color=000000" alt="Burger King Font"></a>
-  </center>
+<div class="container bg">
+	
+	<div class="row">
+	    <div class="center col-sm-12">
+			<img src="assets/img/burger.png" alt="Eat-Da-Burger App">
+	        <h1>Eat-Da-Burger App</h1>
+	        <p></p>
+	    </div>
+  	</div>
+	<!-- end .row -->
 
+	<div class="row">
+	    <div class="col-sm-6">
 
-  <form class="col-md-12" action="/burger/add" method="POST">
-    <div class="col-md-11 col-md-offset-1 text-center" style="margin-top:15px">
-        <label for="burger" style="color: black; font-family: 'Comic Sans MS', cursive, sans-serif">Order Your Burger!</label>
-        <input type="text" id="burger" name="user_burger" required>
-    </div>
-  </form>
-</div>
+			<br>
+			<h2>Burgers Available To Eat!</h2>
 
-<div class="col-md-4">
-  
-  <center>
-  <a href="http://fontmeme.com/burger-king-font/"><img src="http://fontmeme.com/embed.php?text=Your%20a%20Burgers%21&name=Insanibc.ttf&size=20&style_color=000000" alt="Burger King Font"></a>
-  </center>
+			<ul>
+			  {{#each burgers}}
+			    {{#unless this.devoured}}
+			      <li>
+			      	{{this.id}}
+			        {{this.burger_name}}
 
-  <div class="col-md-12 text-center">
-      {{#each burger}}
-        {{#unless this.devoured}}
-          <form class="col-md-12" action="/burger/update/{{this.id}}?_method=PUT" method="POST">
-          <div class="burger_name" style="font-size: 14pt; padding: 10px; color: black; font-family: 'Comic Sans MS', cursive, sans-serif" id="burger1">{{this.burger_name}}
-          </div>
-          <button class="btn btn-warning btn-xs" type="submit"><img src="https://media.giphy.com/media/ToMjGplHPoYqSg7oACc/giphy.gif" alt="" style="max-width: 50px" /></button>
-          </form>
-        {{/unless}}
-      {{/each}}
-  </div>
-</div>
+			        <form action="/{{this.id}}?_method=PUT" method="POST">
+			          <input type="hidden" name="devoured" value="true">
+			          <button class="btn-primary" type="submit">Devour It!</button>
+			        </form>
 
-<div class="col-md-4">
-  <center>
-  <a href="http://fontmeme.com/burger-king-font/"><img src="http://fontmeme.com/embed.php?text=You%20Devoured%21&name=Insanibc.ttf&size=20&style_color=000000" alt="Burger King Font"></a>
-  </center>
-  <div class="col-md-12 text-center">
-    {{#each burger}}
-      {{#if this.devoured}}
-          <form class="col-md-12" action="/burger/delete/{{this.id}}?_method=PUT" method="POST">
-          <div class="burger_name" style="font-size: 14pt; padding: 10px; color: black; font-family: 'Comic Sans MS', cursive, sans-serif">{{this.burger_name}}
-          </div>
-            <button class="btn btn-warning btn-xs" type="submit"><img src="https://media.giphy.com/media/ToMjGplHPoYqSg7oACc/giphy.gif" alt="" style="max-width: 50px" /></button>
-          </form>
-      {{/if}}
-    {{/each}}
-  </div>
+			      </li>
+			    {{/unless}}
+			  {{/each}}
+			</ul>
+
+	    </div>
+
+	    <div class="col-sm-6">
+
+			<h2>Burgers That Have Been Eaten!</h2>
+			
+			  {{#each burgers}}
+			    {{#if this.devoured}}
+			      <li>
+			      	{{this.id}}
+			        {{this.burger_name}}
+
+			      </li>
+			    {{/if}}
+			  {{/each}}
+			
+	    </div>
+
+  	</div>
+	<!-- end .row -->
+
+	<div class="row">
+	    <div class="center col-sm-12">
+
+			<h2>Add A Burger!</h2>
+
+			<form class="create-update-form" action="/" method="POST">
+
+			  <div class="form-group">
+			    <p>Enter a burger you want to order and click the Submit Order button.</p>
+			    <input type="text" id="ca" name="burger_name">
+			  </div>
+			  
+			  <button class="btn-primary" type="submit">Submit Order</button>
+			</form>
+
+	    </div>
+	
+  	</div>
+	<!-- end .row -->
+
 </div>
